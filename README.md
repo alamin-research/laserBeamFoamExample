@@ -1,3 +1,23 @@
+# Running LPBF Simulations with laserBeamFoam
+
+First the openmpi package must be installed and made available. It is a good idea to use spack and activate environments for OpenFOAM
+
+```bash
+spack env activate opoenmpi5_0_8
+source /home/nirjhorOpenFOAM/OpenFOAM-10/etc/bashrc
+```
+
+Whether the correct environment is set up can be checked by running:
+
+```bash
+echo $WM_PROJECT_DIR
+```
+
+Then the example can be run by executing the following commands:
+
+```bash
+./Allrun
+```
 
 # laserBeamFoam-based LPBF Simulation
 
