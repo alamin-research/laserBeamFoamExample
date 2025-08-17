@@ -38,4 +38,21 @@ source $HOME/OpenFOAM-10/etc/bashrc
 # verify OpenFoam environment loaded
 echo $WM_PROJECT_DIR
 
-./Allrun
+. $WM_PROJECT_DIR/bin/tools/RunFunctions
+
+echo "Copying 'initial' to 0"
+cp -r initial 0
+
+# If liggghts in installed, run the DEM model
+if (command -v liggghts > /dev/null); then
+    echo "LIGGGHTS is available: running DEM_small"
+    (cd DEM_small && ./Allrun)
+else
+    echo "liggghts not found in the PATH: skipping"
+fi
+
+runApplication blockMesh
+runApplication setSolidFraction
+runApplication transformPoints "rotate=((0 1 0) (0 0 1))"
+runApplication decomposePar
+runApplication mpirun -np 8 laserbeamFoam -parallel &> log.laserbeamFoam
