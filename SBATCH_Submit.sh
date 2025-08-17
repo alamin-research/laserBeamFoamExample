@@ -3,13 +3,12 @@
 #SBATCH --job-name=LaserBeamFoam_OpenFOAM
 ## Reserving one node and 1 cpus
 #SBATCH --nodes=1
-#SBATCH --ntasks-per-node=32
-## SBATCH -L ansys@osc:1,ansyspar@osc:20
+#SBATCH --ntasks-per-node=8
 ## Reserving a specific node "node004" and 36 cpus (uncomment if needed)
 ##SBATCH --nodelist=node004
 #SBATCH --time=00:55:00
 #SBATCH --account=PNS0496
-#SBATCH --mem=5GB
+#SBATCH --mem=36GB
 #SBATCH --mail-user=aamin1@udayton.edu
 #SBATCH --mail-type=END,FAIL
 #SBATCH --error=./error_%j.txt
