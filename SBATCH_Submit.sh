@@ -3,7 +3,7 @@
 #SBATCH --job-name=LaserBeamFoam_OpenFOAM
 ## Reserving one node and 1 cpus
 #SBATCH --nodes=1
-#SBATCH --ntasks-per-node=8
+#SBATCH --ntasks-per-node=12
 ## Reserving a specific node "node004" and 36 cpus (uncomment if needed)
 ##SBATCH --nodelist=node004
 #SBATCH --time=00:55:00
@@ -55,4 +55,4 @@ runApplication blockMesh
 runApplication setSolidFraction
 runApplication transformPoints "rotate=((0 1 0) (0 0 1))"
 runApplication decomposePar
-runApplication mpirun -np 8 laserbeamFoam -parallel &> log.laserbeamFoam
+runApplication mpirun -np ${SLURM_NTASKS} laserbeamFoam -parallel &> log.laserbeamFoam
